@@ -109,31 +109,39 @@ set_player_x:
 	ret
 
 _load_map:
+	ld bc,scrap_ram_location
+	ld (scrap_ram_ptr),bc
+	ld ix,sprite_pointers
+	ld hl,(current_tile_layer)
+	ld c,(hl)
+	inc hl
+	ld b,(hl)
+	inc hl
+	mlt bc
+	ex hl,de
+	ld hl,32768
+	or a,a
+	sbc hl,bc
+	add hl,de
+	ld (.end_map_ptr),hl
+	ex hl,de
+	ret c
+
+.load_sprite_loop:
 	or a,a
 	sbc hl,hl
 	ld l,a
 	add hl,hl
-	ld bc,(tiles_ptr)
+	ld bc,(gfx_ptr)
 	push bc
 	add hl,bc
-	ld ix,sprite_pointers
 	ld bc,0
 	ld c,(hl)
 	inc hl
 	ld b,(hl)
 	pop hl
 	add hl,bc
-	ld c,(hl)
-	inc hl
-	ld b,(hl)
-	inc hl
-	mlt bc
 	push hl
-	ld hl,32768
-	or a,a
-	sbc hl,bc
-	pop hl
-	ret c
 	push hl
 	ld hl,map_decompress_location
 	push hl
@@ -149,11 +157,27 @@ _load_map:
 	djnz .find_sprite_loop
 	push hl
 	ld hl,(scrap_ram_ptr)
+	ld (ix),hl
+	lea ix,ix+3
 	push hl
 	call zx7_Decompress
 	pop hl
+	pop bc
+	ld b,(hl)
+	inc hl
+	ld c,(hl)
+	mlt bc
+	inc hl
+	add hl,bc
+	ld (scrap_ram_ptr),hl
 	pop hl
-	
+
+	ld bc,0
+.end_map_ptr:=$-3
+	or a,a
+	sbc hl,bc
+	add hl,bc
+	jr c,.load_sprite_loop
 	
 	xor a,a
 	ret
@@ -168,10 +192,10 @@ end_program
 
 sprite_pointers  := ti.pixelShadow
 map_decompress_location  := ti.pixelShadow + 768
-
+scrap_ram_location   := ti.pixelShadow+768+32768
 
 scrap_ram_ptr:
-	dl map_decompress_location+32768
+	dl scrap_ram_location
 tilemap_layers:
 	dl 8 dup 0
 current_keypress:
