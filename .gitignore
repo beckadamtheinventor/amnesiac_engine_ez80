@@ -1,0 +1,12 @@
+/.idea
+/indev_versions
+/captures
+/ref
+/amnesiac_engine.egg-info
+/build
+/dist
+/build
+/amnesiac_engine.egg-info
+*.pyc
+*/__pycache__
+*/saves

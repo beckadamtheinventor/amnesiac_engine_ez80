@@ -1,0 +1,60 @@
+library	"FONTLIBC", 2
+	export	fontlib_SetWindow, 3,1,3,1 ; 0
+	export	fontlib_SetWindowFullScreen ; 3
+	export	fontlib_GetWindowXMin ; 6
+	export	fontlib_GetWindowYMin ; 9
+	export	fontlib_GetWindowWidth ; 12
+	export	fontlib_GetWindowHeight ; 15
+	export	fontlib_SetCursorPosition, 3,1 ; 18
+	export	fontlib_GetCursorX ; 21
+	export	fontlib_GetCursorY ; 24
+	export	fontlib_ShiftCursorPosition, 3,3 ; 27
+	export	fontlib_SetFont, 3,1 ; 30
+	export	fontlib_SetForegroundColor, 1 ; 33
+	export	fontlib_SetBackgroundColor, 1 ; 36
+	export	fontlib_SetColors, 1,1 ; 39
+	export	fontlib_GetForegroundColor ; 42
+	export	fontlib_GetBackgroundColor ; 45
+	export	fontlib_SetTransparency, 1 ; 48
+	export	fontlib_GetTransparency ; 51
+	export	fontlib_SetLineSpacing, 1,1 ; 54
+	export	fontlib_GetSpaceAbove ; 57
+	export	fontlib_GetSpaceBelow ; 60
+	export	fontlib_SetItalicSpacingAdjustment, 1 ; 63
+	export	fontlib_GetItalicSpacingAdjustment ; 66
+	export	fontlib_GetCurrentFontHeight ; 69
+	export	fontlib_ValidateCodePoint, 1 ; 72
+	export	fontlib_GetTotalGlyphs ; 75
+	export	fontlib_GetFirstGlyph ; 78
+	export	fontlib_SetNewlineCode, 1 ; 81
+	export	fontlib_GetNewlineCode ; 84
+	export	fontlib_SetAlternateStopCode, 1 ; 87
+	export	fontlib_GetAlternateStopCode ; 90
+	export	fontlib_SetFirstPrintableCodePoint, 1 ; 93
+	export	fontlib_GetFirstPrintableCodePoint ; 96
+	export	fontlib_SetDrawIntCodePoints, 1,1 ; 99
+	export	fontlib_GetDrawIntMinus ; 102
+	export	fontlib_GetDrawIntZero ; 105
+	export	fontlib_GetGlyphWidth, 1 ; 108
+	export	fontlib_GetStringWidth, 3 ; 111
+	export	fontlib_GetStringWidthL, 3,3 ; 114
+	export	fontlib_GetLastCharacterRead ; 117
+	export	fontlib_DrawGlyph, 1 ; 120
+	export	fontlib_DrawString, 3 ; 123
+	export	fontlib_DrawStringL, 3,3 ; 126
+	export	fontlib_DrawInt, 3,1 ; 129
+	export	fontlib_DrawUInt, 3,1 ; 132
+	export	fontlib_ClearEOL ; 135
+	export	fontlib_ClearWindow ; 138
+	export	fontlib_Newline ; 141
+	export	fontlib_SetNewlineOptions, 1 ; 144
+	export	fontlib_GetNewlineOptions ; 147
+	export	fontlib_GetFontPackName, 3 ; 150
+	export	fontlib_GetFontByIndex, 3,1 ; 153
+	export	fontlib_GetFontByIndexRaw, 3,1 ; 156
+	export	fontlib_GetFontByStyle, 3,1,1,1,1,1,1 ; 159
+	export	fontlib_GetFontByStyleRaw, 3,1,1,1,1,1,1 ; 162
+	export	fontlib_ScrollWindowDown ; 165
+	export	fontlib_ScrollWindowUp ; 168
+	export	fontlib_Home ; 171
+	export	fontlib_HomeUp ; 174
