@@ -1,2 +1,3 @@
 # amnesiac_engine_ez80
-amnesiac engine ez80 build files and etc.
+Amnesiac engine ez80 build files and etc.
+Cloned by the Amnesiac Engine's ez80 build target.
