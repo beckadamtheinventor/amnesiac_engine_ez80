@@ -1,8 +1,52 @@
 
 include 'include/macros.inc'
-format ti executable "{program_name}"
+format ti executable "X{0}"
 
 clibs_program
+
+program_start:
+	call ti_CloseAll
+	c_call ti_Open, gfx_file, mode_r
+	or a,a
+	jq z,full_exit
+	ld c,a
+	push bc
+	call ti_GetDataPtr
+	ld (gfx_ptr),hl
+	call ti_Close
+	pop bc
+
+	c_call ti_Open, tiles_file, mode_r
+	or a,a
+	jq z,full_exit
+	ld c,a
+	push bc
+	call ti_GetDataPtr
+	ld (tiles_ptr),hl
+	call ti_Close
+	pop bc
+
+	call gfx_Begin
+	call gfx_ZeroScreen
+	c_call gfx_SetDraw,1
+
+main_draw:
+	call gfx_ZeroScreen
+	call draw_scripts
+.key:
+	call passive_scripts
+	call ti.GetCSC
+	or a,a
+	jr z,.key
+	call key_scripts
+	jq main_draw
+
+
+full_exit:
+	call ti_CloseAll
+	call gfx_End
+
+end_program
 
 program_start:
 	call ti_CloseAll
@@ -61,10 +105,10 @@ main_draw:
 	pop bc
 	djnz .loop
 
-include 'draw_scripts.asm'
+	call draw_scripts
 
 .key:
-include 'passive_scripts.asm'
+	call passive_scripts
 	call ti.GetCSC
 	or a,a
 	jr z,.key
@@ -79,7 +123,7 @@ include 'passive_scripts.asm'
 	jq z,move_east
 	cp a,4
 	jq z,move_south
-include 'key_scripts.asm'
+	call key_scripts
 	ret
 
 move_north:
@@ -182,8 +226,6 @@ _load_map:
 	xor a,a
 	ret
 
-include 'user_scripts.asm'
-
 full_exit:
 	call ti_CloseAll
 	call gfx_End
@@ -200,15 +242,22 @@ tilemap_layers:
 	dl 8 dup 0
 current_keypress:
 	db 0
+
+include 'draw_scripts.asm'
+include 'passive_scripts.asm'
+include 'key_scripts.asm'
+include 'user_scripts.asm'
+
+
 gfx_ptr:
 	dl 0
 tiles_ptr:
 	dl 0
 
-gfx_file:
-	db "{gfx_appvar}",0
 tiles_file:
-	db "{tiles_appvar}",0
+	db "Y{0}",0
+gfx_file:
+	db "Z{0}",0
 
 mode_r:
 	db "r",0
