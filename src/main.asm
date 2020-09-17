@@ -123,8 +123,7 @@ main_draw:
 	jq z,move_east
 	cp a,4
 	jq z,move_south
-	call key_scripts
-	ret
+	jp key_scripts
 
 move_north:
 	ld hl,(player_position_y)
