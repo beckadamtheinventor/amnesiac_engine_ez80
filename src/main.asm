@@ -30,50 +30,6 @@ program_start:
 	call gfx_ZeroScreen
 	c_call gfx_SetDraw,1
 
-main_draw:
-	call gfx_ZeroScreen
-	call draw_scripts
-.key:
-	call passive_scripts
-	call ti.GetCSC
-	or a,a
-	jr z,.key
-	call key_scripts
-	jq main_draw
-
-
-full_exit:
-	call ti_CloseAll
-	call gfx_End
-
-end_program
-
-program_start:
-	call ti_CloseAll
-	c_call ti_Open, gfx_file, mode_r
-	or a,a
-	jq z,full_exit
-	ld c,a
-	push bc
-	call ti_GetDataPtr
-	ld (gfx_ptr),hl
-	call ti_Close
-	pop bc
-
-	c_call ti_Open, tiles_file, mode_r
-	or a,a
-	jq z,full_exit
-	ld c,a
-	push bc
-	call ti_GetDataPtr
-	ld (tiles_ptr),hl
-	call ti_Close
-	pop bc
-
-	call gfx_Begin
-	call gfx_ZeroScreen
-	c_call gfx_SetDraw,1
-
 	xor a,a
 load_map:
 	call _load_map
