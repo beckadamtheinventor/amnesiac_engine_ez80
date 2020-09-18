@@ -194,6 +194,8 @@ scrap_ram_ptr:
 	dl scrap_ram_location
 tilemap_layers:
 	dl 8 dup 0
+current_tile_layer:
+	dl 0
 current_keypress:
 	db 0
 player_position_x:
