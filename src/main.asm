@@ -4,7 +4,6 @@ format ti executable "X{0}"
 
 clibs_program
 
-program_start:
 	call ti_CloseAll
 	c_call ti_Open, gfx_file, mode_r
 	or a,a
