@@ -196,6 +196,11 @@ tilemap_layers:
 	dl 8 dup 0
 current_keypress:
 	db 0
+player_position_x:
+	dl 0
+player_position_y:
+	dl 0
+player_speed := 2
 
 include 'draw_scripts.asm'
 include 'passive_scripts.asm'
